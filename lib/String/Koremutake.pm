@@ -2,7 +2,7 @@ package String::Koremutake;
 use strict;
 use warnings;
 use Error;
-our $VERSION = '0.28';
+our $VERSION = '0.29';
 
 my @phonemes = map { lc } qw{BA BE BI BO BU BY DA DE DI DO DU DY FA FE FI
 FO FU FY GA GE GI GO GU GY HA HE HI HO HU HY JA JE JI JO JU JY KA KE
@@ -29,7 +29,7 @@ sub new {
   return $self;
 }
 
-sub numbers_to_koremutake {
+sub _numbers_to_koremutake {
   my($self, $numbers) = @_;
   my $string;
   foreach my $n (@$numbers) {
@@ -39,7 +39,7 @@ sub numbers_to_koremutake {
   return $string;
 }
 
-sub koremutake_to_numbers {
+sub _koremutake_to_numbers {
   my($self, $string) = @_;
   my @numbers;
   my $phoneme;
@@ -68,12 +68,12 @@ sub integer_to_koremutake {
     push @numbers, $integer % 128;
     $integer = int($integer/128);
   }
-  return $self->numbers_to_koremutake([reverse @numbers]);
+  return $self->_numbers_to_koremutake([reverse @numbers]);
 }
 
 sub koremutake_to_integer {
   my($self, $string) = @_;
-  my $numbers = $self->koremutake_to_numbers($string);
+  my $numbers = $self->_koremutake_to_numbers($string);
   my $integer = 0;
   while (@$numbers) {
     my $n = shift @$numbers;
