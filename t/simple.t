@@ -1,7 +1,7 @@
 use strict;
 use warnings;
 use lib 'lib';
-use Test::More tests => 32;
+use Test::More tests => 34;
 use Test::Exception;
 use_ok('String::Koremutake');
 
@@ -15,6 +15,9 @@ is_deeply($k->_koremutake_to_numbers("koremutake"), [39,67,52,78,37]);
 throws_ok { $k->_koremutake_to_numbers("qwe") } qr/Phoneme qwe not valid/;
 
 dies_ok { $k->integer_to_koremutake(-1) };
+
+throws_ok { $k->integer_to_koremutake() } qr/No integer given/;
+throws_ok { $k->koremutake_to_integer() } qr/No koremutake string given/;
 
 is($k->integer_to_koremutake(0), 'ba');
 is($k->integer_to_koremutake(39), 'ko');

@@ -2,14 +2,14 @@
 use ExtUtils::MakeMaker;
 WriteMakefile
 (
-          'PL_FILES' => {},
-          'INSTALLDIRS' => 'site',
           'NAME' => 'String::Koremutake',
           'VERSION_FROM' => 'lib/String/Koremutake.pm',
           'PREREQ_PM' => {
-                           'Test::More' => '0.01',
                            'Error' => '0.15',
-                           'Test::Exception' => '0.15'
-                         }
+                           'Test::Exception' => '0.15',
+                           'Test::More' => '0.01'
+                         },
+          'INSTALLDIRS' => 'site',
+          'PL_FILES' => {}
         )
 ;
